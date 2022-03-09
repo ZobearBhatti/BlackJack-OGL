@@ -72,8 +72,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Zobear\Desktop\Folders\Programming\C++\BlackJack\BlackJackProto1\include</IncludePath>
+    <IncludePath>C:\Users\Zobear\Desktop\Folders\Programming\C++\glfw-3.3.6\include;C:\Users\Zobear\Desktop\Folders\Programming\C++\BlackJack\BlackJackProto1\include</IncludePath>
     <LibraryPath>C:\Users\Zobear\Desktop\Folders\Programming\C++\BlackJack\BlackJackProto1\lib</LibraryPath>
+    <SourcePath>C:\Users\Zobear\Desktop\Folders\Programming\C++\BlackJack\BlackJackProto1\src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -81,7 +82,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>C:\Users\Zobear\Desktop\Folders\Programming\C++\BlackJack\BlackJackProto1\include</IncludePath>
-    <LibraryPath>C:\Users\Zobear\Desktop\Folders\Programming\C++\BlackJack\BlackJackProto1\lib</LibraryPath>
+    <SourcePath>$(SourcePath)</SourcePath>
+    <LibraryPath>C:\Users\Zobear\Desktop\Folders\Programming\C++\BlackJack\BlackJackProto1\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -96,6 +98,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -124,7 +127,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
