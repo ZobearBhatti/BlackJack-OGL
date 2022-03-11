@@ -148,7 +148,9 @@ void update() {
                 dealerTimer += deltaTime;
                 if (dealerTimer > 0.4f)
                 {
-                    cardTaking = false;
+                    if (!tryStanding) {
+                        cardTaking = false;
+                    }
                     dealerTimer = 0.0f;
                     animating = true;
                     animPlayer = false;
@@ -159,7 +161,6 @@ void update() {
             }
         }
 
-        int hv{ 0 };
         if (animating) {
             animTimer += 5 * deltaTime;
             if (animTimer > 0.5) {
@@ -171,7 +172,11 @@ void update() {
                         evalWin(0);
                         cardTaking = false;
                     }
-                    if (dealerScore >= 17) { cardTaking = false; }
+                    else if (playerScore == 21)
+                    {
+                        evalWin(2);
+                    }
+                    if (dealerScore >= 17 || dealerScore >= playerScore) { cardTaking = false; }
                 }
                 else {
                     addCard(false);
@@ -181,6 +186,9 @@ void update() {
                     dealerScore = handValue(false);
                     if (dealerScore > 21) {
                         evalWin(1);
+                    }
+                    else if (dealerScore == 21) {
+                        evalWin(0);
                     }
                 }
             }
@@ -194,6 +202,9 @@ void update() {
             playing = true;
             playerScore = 0;
             dealerScore = 0;
+            cardTaking = false;
+            tryStanding = false;
+            standing = false;
         }
     }
 }
@@ -349,10 +360,9 @@ int handValue(bool player) {
                 handValue += value + 1;
             }
             if (value == 0) {
-                if (handValue + (end - i) + 11 <= 21) {
-                    handValue += 11;
+                if (handValue + (end - i - 1) + 10 <= 21) {
+                    handValue += 10;
                 }
-                else { handValue += 1; }
             }
             i++;
         }
@@ -371,10 +381,9 @@ int handValue(bool player) {
                 handValue += value + 1;
             }
             if (value == 0) {
-                if (handValue + (end - i) + 11 <= 21) {
+                if (handValue + (end - i) + 10 <= 21) {
                     handValue += 10;
                 }
-                else { handValue += 1; }
             }
             i++;
         }

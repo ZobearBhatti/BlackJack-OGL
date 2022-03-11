@@ -40,8 +40,8 @@ float animTimer;
 float currentFrame;
 float deltaTime;
 float lastFrame;
-const unsigned int SCR_WIDTH = 900;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH = 1600;
+const unsigned int SCR_HEIGHT = 900;
 
 bool playing = true;
 
