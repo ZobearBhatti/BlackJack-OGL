@@ -113,7 +113,7 @@ void init() {
     addCard(true);
     addCard(false);
 
-    glClearColor(0.2, 0.2, 0.2, 1.0);
+    glClearColor(0.2, 0.5, 0.2, 1.0);
 
     initTextRend();
 }
