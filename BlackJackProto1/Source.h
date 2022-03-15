@@ -11,11 +11,11 @@
 #include "Camera.h"
 #include "shader.h"
 #include "stb_image.h"
+#include "TextRenderer.h"
 
 #include <windows.h>
 #include <list>
 #include <iterator>
-
 
 #include <cstdlib>
 #include <ctime>
@@ -26,6 +26,7 @@ void update();
 void draw();
 void drawTable();
 void drawCards();
+void drawScores();
 
 void onclose();
 
@@ -42,7 +43,7 @@ float deltaTime;
 float lastFrame;
 const unsigned int SCR_WIDTH = 1600;
 const unsigned int SCR_HEIGHT = 900;
-
+int winner;
 bool playing = true;
 
 const glm::mat4 projection{ glm::perspective(glm::radians(45.0f), float(SCR_WIDTH) / float(SCR_HEIGHT), 0.1f, 100.0f) };

@@ -32,6 +32,7 @@ int main()
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
+
     glEnable(GL_MULTISAMPLE);
     glEnable(GL_BLEND);
     glEnable(GL_STENCIL_TEST);
@@ -113,6 +114,8 @@ void init() {
     addCard(false);
 
     glClearColor(0.2, 0.2, 0.2, 1.0);
+
+    initTextRend();
 }
 
 void update() {
@@ -120,7 +123,7 @@ void update() {
     deltaTime = currentFrame - lastFrame;
     lastFrame = currentFrame;
 
-    //camera.update(window, deltaTime);
+    camera.update(window, deltaTime);
 
     lightPos.x = sin(currentFrame * 0.3f);
 
@@ -217,21 +220,21 @@ void evalWin(int state) {
     playing = false;
 
     if (state == 0) {
-        std::cout << "\n DEALER WIN \n";
+        winner = 1;
         // dealer win
     }
     else if (state == 1) {
         // player win
-        std::cout << "\n PLAYER WIN \n";
+        winner = 0;
     }
     else {
         if (playerScore > dealerScore) {
             // player win
-            std::cout << "\n PLAYER WIN \n";
+            winner = 0;
         }
         else {
             // dealer win
-            std::cout << "\n DEALER WIN \n";
+            winner = 1;
         }
     }
 }
@@ -240,6 +243,7 @@ void draw() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     drawTable();
     drawCards();
+    drawScores();
 }
 
 void drawTable() {
@@ -321,6 +325,24 @@ void drawCards() {
 
 }
 
+void drawScores() {
+
+    std::string pSc = std::to_string(playerScore);
+    std::string dSc = std::to_string(dealerScore);
+
+    RenderText(pSc, 220.0f, 720.0f, 1.0f,
+        glm::vec3(0.0, 0.0, 1.0));
+
+    RenderText(dSc, 1300.0f, 720.0f, 1.0f,
+        glm::vec3(1.0, 0.0, 0.0));
+
+    if (!playing) {
+        std::string w = (winner == 0) ? "Player Wins" : "Dealer Wins";
+        RenderText(w, 700, 800, 1.0, glm::vec3(1.0, 1.0, 0.0));
+    }
+
+}
+
 void addCard(bool player) {
     if (player) {
         playerCards.push_back(newCard());
@@ -381,7 +403,7 @@ int handValue(bool player) {
                 handValue += value + 1;
             }
             if (value == 0) {
-                if (handValue + (end - i) + 10 <= 21) {
+                if (handValue + (end - i - 1) + 10 <= 21) {
                     handValue += 10;
                 }
             }
